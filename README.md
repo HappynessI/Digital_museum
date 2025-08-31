@@ -1,24 +1,75 @@
-# digital_museum
+# ⭐️ 项目简介
 
-## Project setup
+你好，这里是“溯本求源，文润经心”实践队网站的开发仓库。
+
+目前该项目包含了丰富的前端页面，在后端支持方面集成了具有RAG功能的网站ai助手。本项目将在下一次社会实践之际进行大型更新，未来还有许多令人兴奋的功能即将推出！
+
+## 👀 效果演示
+
+
+## 🚀 快速上手
+
+1.打开终端，切换到frontend文件夹
+```
+cd ./frontend
+```
+
+2.安装前端依赖
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+3.启动前端服务
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+4.切换到backend文件夹
 ```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
+cd ./backend
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+5.安装后端依赖
+```
+npm install
+```
+
+6.启动后端服务
+```
+npm run dev
+```
+
+然后打开localhost链接即可
+
+
+## **溯本求源**
+
+在为期7天的齐鲁文化寻根之旅中，我们从青铜重器到风筝纸鸢，从陶琉华彩到梨膏芬芳，于时光长廊触摸文明脉动，在匠人指间感受传承温度。
+
+## **文润经心**
+
+我们在实地调研实践中体悟到，传统文化不是博物馆里的静态标签，而是流淌在民族血脉中的源头活水，浸润心灵、重塑灵魂。
+
+每一次触摸都是与历史的对话，
+
+每一次凝望都是对文明的致敬。
+
+旅程终有句点，薪火却长明不熄。
+
+以少年意气为翼，携时代新风为笔。
+
+让古老智慧在创新中苏醒，
+
+用今朝语韵，重谱经典新章。
+
+这是对先人的敬诺，
+
+亦是对未来的担当。
+
+载着滚烫记忆奔赴前路，
+
+让文脉在新时代绵延生长。
+
+
+
+
