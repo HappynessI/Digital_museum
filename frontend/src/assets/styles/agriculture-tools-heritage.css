@@ -1,0 +1,376 @@
+/* 现代传承卡片样式 - 严格按照Architecture原始设计 */
+
+/* 现代传承容器 */
+.heritage-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 80px 40px 150px 40px; /* 增加底部padding，为往上弹出的卡片预留空间 */
+  position: relative;
+  background: var(--paper);
+}
+
+.heritage-title {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--amber);
+  margin-bottom: 80px;
+  position: relative;
+}
+
+.heritage-title::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--amber), var(--gold));
+  border-radius: 2px;
+}
+
+/* 卡片布局 */
+.heritage-flex {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 现代传承卡片基础样式 - 调整尺寸适应页面宽度 */
+.heritage-card-modern {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  height: 240px;
+  max-width: 280px;
+  border-radius: 16px;
+  overflow: visible;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-shadow: 0 15px 35px rgba(43, 33, 24, 0.2);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  margin: 120px auto; /* 增加上下margin，为文字展开预留更多空间 */
+}
+
+/* 卡片动画状态 */
+.heritage-card-modern.animate {
+  opacity: 1;
+}
+
+/* 错落有致的布局 - 第一、三张向上，第二、四张向下 */
+.heritage-card-modern.card-elevated {
+  transform: translateY(80px) !important;
+}
+
+.heritage-card-modern.card-elevated.animate {
+  transform: translateY(80px) !important;
+}
+
+/* 为错落效果添加位置和旋转角度 - 提高优先级 */
+.heritage-card-modern:nth-child(1) {
+  transform: translateY(-60px) rotate(-1.5deg) !important;
+}
+
+.heritage-card-modern:nth-child(2).card-elevated {
+  transform: translateY(80px) rotate(1.5deg) !important;
+}
+
+.heritage-card-modern:nth-child(3) {
+  transform: translateY(-60px) rotate(1.5deg) !important;
+}
+
+.heritage-card-modern:nth-child(4).card-elevated {
+  transform: translateY(80px) rotate(-1.5deg) !important;
+}
+
+/* 动画状态下保持位置和旋转 - 提高优先级 */
+.heritage-card-modern:nth-child(1).animate {
+  transform: translateY(-60px) rotate(-1.5deg) !important;
+}
+
+.heritage-card-modern:nth-child(2).card-elevated.animate {
+  transform: translateY(80px) rotate(1.5deg) !important;
+}
+
+.heritage-card-modern:nth-child(3).animate {
+  transform: translateY(-60px) rotate(1.5deg) !important;
+}
+
+.heritage-card-modern:nth-child(4).card-elevated.animate {
+  transform: translateY(80px) rotate(-1.5deg) !important;
+}
+
+/* 图片背景虚化覆盖层 */
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(43, 33, 24, 0.6) 0%,
+    rgba(43, 33, 24, 0.4) 50%,
+    rgba(43, 33, 24, 0.6) 100%
+  );
+  backdrop-filter: blur(2px);
+  transition: all 0.4s ease;
+  z-index: 1;
+}
+
+/* 卡片内部图片虚化效果 */
+.heritage-card-modern::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: inherit;
+  background-size: inherit;
+  background-position: inherit;
+  background-repeat: inherit;
+  filter: blur(1px);
+  z-index: 0;
+}
+
+/* 卡片内容 - 重新设计为文字在卡片内部显示 */
+.card-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 2;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 卡片标题 */
+.card-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--paper);
+  margin-bottom: 10px;
+  text-shadow: 0 2px 4px rgba(43, 33, 24, 0.8);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 简短描述 */
+.card-brief {
+  font-size: 1.1rem;
+  color: var(--pear);
+  font-weight: 500;
+  text-shadow: 0 1px 3px rgba(43, 33, 24, 0.7);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 文字展开区域 - 在卡片外部（默认在下方） */
+.card-expanded-text {
+  position: absolute;
+  top: 100%;
+  left: -50px;
+  width: calc(100% + 100px);
+  background: var(--paper);
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 15px;
+  box-shadow: 0 10px 30px rgba(43, 33, 24, 0.15);
+  opacity: 0;
+  transform: translateY(-20px) scale(0.95);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10;
+  pointer-events: none;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  min-height: 80px;
+}
+
+/* 上方显示文字的卡片 */
+.card-top-text .card-expanded-text {
+  top: auto;
+  bottom: 100%;
+  left: -50px;
+  width: calc(100% + 100px);
+  margin-top: 0;
+  margin-bottom: 25px; /* 增加与标题的距离 */
+  transform: translateY(20px) scale(0.95);
+}
+
+.card-expanded-text h4 {
+  color: var(--ink);
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.card-expanded-text p {
+  color: var(--soil);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* 下方显示文字的卡片悬浮效果 - 向上移动 */
+.heritage-card-modern:nth-child(1).card-bottom-text:hover {
+  transform: translateY(-70px) rotate(-1.5deg) scale(1.02) !important;
+  box-shadow: 0 25px 50px rgba(43, 33, 24, 0.3);
+  background-size: 102%;
+}
+
+.heritage-card-modern:nth-child(3).card-bottom-text:hover {
+  transform: translateY(-70px) rotate(1.5deg) scale(1.02) !important;
+  box-shadow: 0 25px 50px rgba(43, 33, 24, 0.3);
+  background-size: 102%;
+}
+
+/* 上方显示文字的卡片悬浮效果 - 向下移动 */
+.heritage-card-modern:nth-child(2).card-top-text.card-elevated:hover {
+  transform: translateY(70px) rotate(1.5deg) scale(1.02) !important;
+  box-shadow: 0 25px 50px rgba(43, 33, 24, 0.3);
+  background-size: 102%;
+}
+
+.heritage-card-modern:nth-child(4).card-top-text.card-elevated:hover {
+  transform: translateY(70px) rotate(-1.5deg) scale(1.02) !important;
+  box-shadow: 0 25px 50px rgba(43, 33, 24, 0.3);
+  background-size: 102%;
+}
+
+/* 悬浮时显示文字展开区域 */
+.heritage-card-modern:hover .card-expanded-text {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* 上方显示文字的卡片悬浮时的特殊动画 */
+.heritage-card-modern.card-top-text:hover .card-expanded-text {
+  transform: translateY(0) scale(1);
+}
+
+/* 悬浮时减少背景虚化，让图片更清晰 */
+.heritage-card-modern:hover .card-overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(43, 33, 24, 0.3) 0%,
+    rgba(43, 33, 24, 0.1) 50%,
+    rgba(43, 33, 24, 0.3) 100%
+  );
+  backdrop-filter: blur(1px);
+}
+
+.heritage-card-modern:hover::before {
+  filter: blur(0.5px);
+}
+
+/* 悬浮时卡片内文字淡出 */
+.heritage-card-modern:hover .card-content {
+  opacity: 0.7;
+}
+
+/* 卡片边缘金色边框效果 */
+.heritage-card-modern::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border: 2px solid transparent;
+  border-radius: 18px;
+  background: linear-gradient(45deg, var(--gold), transparent, var(--amber)) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: exclude;
+  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.heritage-card-modern:hover::after {
+  opacity: 0.8;
+}
+
+/* 角落装饰 */
+.corner-star,
+.corner-diamond,
+.corner-triangle,
+.corner-circle {
+  position: absolute;
+  opacity: 0.3;
+}
+
+.corner-star {
+  top: 15px;
+  right: 15px;
+  width: 16px;
+  height: 16px;
+  background: var(--gold);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.corner-diamond {
+  top: 15px;
+  left: 15px;
+  width: 12px;
+  height: 12px;
+  background: var(--gold);
+  transform: rotate(45deg);
+}
+
+.corner-triangle {
+  bottom: 15px;
+  right: 15px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 14px solid var(--gold);
+}
+
+.corner-circle {
+  bottom: 15px;
+  left: 15px;
+  width: 12px;
+  height: 12px;
+  background: var(--gold);
+  border-radius: 50%;
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+  .heritage-flex {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .heritage-flex {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+  
+  .heritage-card-modern {
+    height: 240px;
+    margin: 80px 0;
+  }
+  
+  .heritage-title {
+    font-size: 2.5rem;
+    margin-bottom: 60px;
+  }
+}

@@ -1,0 +1,503 @@
+/* 农具演进页面补充样式 - 基于原始Atool.html */
+
+/* 印章按钮增强样式 */
+.btn-seal-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+.btn-seal-text .line {
+  line-height: 1;
+}
+
+/* 时间轴圆点年份样式 */
+.dot-year {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--amber);
+  background: var(--paper);
+  padding: 4px 8px;
+  border-radius: 12px;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 3;
+  text-shadow: 0 1px 2px rgba(43, 33, 24, 0.3);
+}
+
+/* 时间轴副标题 */
+.timeline-subtitle {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--amber);
+  font-weight: 500;
+  margin-bottom: 10px;
+  opacity: 0.8;
+  font-style: italic;
+}
+
+/* 现代传承区域样式 */
+.heritage-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 80px 40px;
+  position: relative;
+  background: var(--paper);
+}
+
+.heritage-title {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--amber);
+  margin-bottom: 80px;
+  position: relative;
+}
+
+.heritage-title::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--amber), var(--gold));
+  border-radius: 2px;
+}
+
+/* 装饰元素 */
+.heritage-decoration-tools,
+.star-decoration,
+.diamond-decoration,
+.triangle-decoration,
+.circle-decoration,
+.hexagon-decoration {
+  position: absolute;
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.star-decoration {
+  width: 20px;
+  height: 20px;
+  background: var(--amber);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.diamond-decoration {
+  width: 16px;
+  height: 16px;
+  background: var(--gold);
+  transform: rotate(45deg);
+}
+
+.triangle-decoration {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 18px solid var(--amber);
+}
+
+.circle-decoration {
+  width: 14px;
+  height: 14px;
+  background: var(--gold);
+  border-radius: 50%;
+}
+
+.hexagon-decoration {
+  width: 20px;
+  height: 17px;
+  background: var(--amber);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+/* 传承卡片布局 */
+.heritage-flex {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  position: relative;
+  z-index: 2;
+}
+
+.heritage-card-modern {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 20px;
+  padding: 30px 20px;
+  height: 400px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(43, 33, 24, 0.3);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+.heritage-card-modern.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.heritage-card-modern:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 25px 50px rgba(43, 33, 24, 0.4);
+}
+
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(43, 33, 24, 0.5));
+  z-index: 1;
+}
+
+.card-content {
+  position: relative;
+  z-index: 2;
+  color: var(--paper);
+  text-align: center;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--gold);
+}
+
+.card-brief {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+.card-expanded-text {
+  position: absolute;
+  bottom: 30px;
+  left: 20px;
+  right: 20px;
+  color: var(--paper);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+  z-index: 2;
+}
+
+.heritage-card-modern:hover .card-expanded-text {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card-expanded-text h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--gold);
+}
+
+.card-expanded-text p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+/* 卡片顶部/底部文字布局 */
+.card-top-text .card-content {
+  position: absolute;
+  top: 30px;
+  left: 20px;
+  right: 20px;
+}
+
+.card-bottom-text .card-content {
+  position: absolute;
+  bottom: 80px;
+  left: 20px;
+  right: 20px;
+}
+
+.card-elevated {
+  z-index: 5;
+}
+
+/* 角落装饰 */
+.corner-star,
+.corner-diamond,
+.corner-triangle,
+.corner-circle {
+  position: absolute;
+  opacity: 0.3;
+}
+
+.corner-star {
+  top: 15px;
+  right: 15px;
+  width: 16px;
+  height: 16px;
+  background: var(--gold);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.corner-diamond {
+  top: 15px;
+  left: 15px;
+  width: 12px;
+  height: 12px;
+  background: var(--gold);
+  transform: rotate(45deg);
+}
+
+.corner-triangle {
+  bottom: 15px;
+  right: 15px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 14px solid var(--gold);
+}
+
+.corner-circle {
+  bottom: 15px;
+  left: 15px;
+  width: 12px;
+  height: 12px;
+  background: var(--gold);
+  border-radius: 50%;
+}
+
+/* 时间轴增强动画 */
+.timeline-vertical-item {
+  opacity: 0.6;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.timeline-vertical-item.animate {
+  opacity: 1;
+}
+
+.timeline-vertical-item.in-focus {
+  opacity: 1;
+  transform: scale(1.02);
+  z-index: 10;
+}
+
+.timeline-vertical-item:not(.in-focus) {
+  opacity: 0.6;
+  transform: scale(0.98);
+}
+
+/* 时间轴圆点增强 */
+.timeline-dot {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timeline-dot::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 32px;
+  height: 32px;
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulse-ring 2s ease-in-out infinite;
+  opacity: 0.6;
+}
+
+.timeline-dot::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, var(--gold), var(--amber));
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+  z-index: 1;
+}
+
+/* 聚焦时的圆点效果 */
+.timeline-vertical-item.in-focus .timeline-dot::before {
+  border-color: var(--amber);
+  animation: pulse-ring-active 1.5s ease-in-out infinite;
+}
+
+.timeline-vertical-item.in-focus .timeline-dot::after {
+  background: radial-gradient(circle, var(--amber), var(--gold));
+  box-shadow: 0 0 15px rgba(198, 125, 40, 0.7);
+}
+
+/* 聚焦时年份文字效果 */
+.timeline-vertical-item.in-focus .dot-year {
+  color: var(--gold);
+  opacity: 1;
+  transform: translateX(-50%) scale(1.1);
+  text-shadow: 0 2px 6px rgba(43, 33, 24, 0.8);
+}
+
+/* 圆点脉冲动画 */
+@keyframes pulse-ring {
+  0% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0.4;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0.8;
+  }
+}
+
+@keyframes pulse-ring-active {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.5);
+    opacity: 0.3;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+/* 时间轴背景装饰 */
+.timeline-vertical-container::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, 
+      transparent 0%,
+      var(--gold) 10%,
+      var(--amber) 50%,
+      var(--soil) 90%,
+      transparent 100%);
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+/* 时间轴光晕效果 */
+.timeline-vertical-container::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 20%;
+  bottom: 20%;
+  width: 20px;
+  background: linear-gradient(to bottom, 
+      rgba(212, 175, 55, 0.3) 0%,
+      rgba(198, 125, 40, 0.2) 50%,
+      rgba(139, 90, 60, 0.3) 100%);
+  border-radius: 10px;
+  transform: translateX(-50%);
+  filter: blur(8px);
+  z-index: 0;
+}
+
+/* 图片尺寸调整 */
+.timeline-image {
+  width: 350px !important;
+  height: 250px !important;
+  object-fit: cover;
+}
+
+/* 图片框架增强 */
+.image-frame {
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 3px solid transparent;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.image-frame::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, 
+      var(--gold) 0%, 
+      transparent 25%, 
+      transparent 75%, 
+      var(--amber) 100%);
+  border-radius: 14px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.timeline-vertical-item.in-focus .image-frame {
+  border-color: var(--gold);
+  box-shadow: 0 15px 30px rgba(43, 33, 24, 0.3), 
+              0 0 20px rgba(198, 125, 40, 0.2);
+}
+
+.timeline-vertical-item.in-focus .image-frame::before {
+  opacity: 0.8;
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+  .heritage-flex {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .heritage-flex {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+  
+  .heritage-card-modern {
+    height: 350px;
+  }
+  
+  .heritage-title {
+    font-size: 2.5rem;
+    margin-bottom: 60px;
+  }
+  
+  .timeline-image {
+    width: 280px !important;
+    height: 200px !important;
+  }
+  
+  .dot-year {
+    font-size: 0.7rem;
+    padding: 3px 6px;
+  }
+}
